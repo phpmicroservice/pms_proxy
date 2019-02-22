@@ -35,7 +35,7 @@ class Guidance extends \Phalcon\Di\Injectable
      */
     public function beforeStart(Event $event, \pms\Server $pms_server, \Swoole\Server $server)
     {
-        output('beforeStart  beforeStart', 'beforeStart');
+        \pms\output('beforeStart  beforeStart', 'beforeStart');
         $server->channel = new \Swoole\Channel(1024 * 1024 * 128);# 128M
 
     }
@@ -48,14 +48,14 @@ class Guidance extends \Phalcon\Di\Injectable
      */
     public function onWorkerStart(Event $event, \pms\Server $pms_server, \Swoole\Server $server)
     {
-        output($server->taskworker, 'guidance');
+        \pms\output($server->taskworker, 'guidance');
         # 绑定一个权限验证
         $this->eventsManager->attach('Router:handleCall', $this);
         # 绑定一个准备判断和准备成功
         $this->eventsManager->attach('Server:readyJudge', $this);
         $this->eventsManager->attach('Server:readySucceed', $this);
         $this->eventsManager->attach('App:receive', function (Event $event, App $app) {
-            \output(get_class($event), '6262262662');
+           \pms\output(get_class($event), '6262262662');
             $app->eventsManager->attach('dispatch:beforeDispatch', function ($Event, \pms\Dispatcher $dispatch) {
                 $s = $dispatch->connect->s;
                 if (!empty($s)) {
@@ -75,8 +75,9 @@ class Guidance extends \Phalcon\Di\Injectable
     {
 
         $this->dConfig->ready = true;
-        output('初始化完成', 'init');
+        \pms\output('初始化完成', 'init');
     }
+
 
     /**
      * 准备完成
@@ -85,7 +86,7 @@ class Guidance extends \Phalcon\Di\Injectable
     {
         if ($this->cache->get('UpdateServer94')) {
             $this->cache->save('UpdateServer94', false);
-            \output("96969696969666666");
+           \pms\output("96969696969666666");
             #实例化更新服务列表
             $ser = new logic\UpdateServer($swoole_server);
             $ser->start();
