@@ -76,7 +76,7 @@ class UpdateServer extends \app\Base
         if ($data['e']) {
             # 出错
         } else {
-//            \pms\output($data, 'US_receive');
+            \pms\output($data, 'US_receive');
             # 正确的
             if ($data['t'] == '/service/getall') {
                 # 我们需要的数据

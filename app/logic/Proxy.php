@@ -72,7 +72,7 @@ class Proxy extends Base
         $cache_key = '74_' . $server_name;
         $gCache = \Phalcon\Di::getDefault()->getShared('gCache');
         $config_list = $gCache->get($cache_key,[]);
-
+        \pms\Output::output($config_list, 'pr-start');
         if (count((array)$config_list) > 1) {
             $config = $config_list[mt_rand(0, count($config_list) - 1)];
         } else {
