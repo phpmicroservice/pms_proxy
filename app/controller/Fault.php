@@ -8,7 +8,7 @@ use app\logic\Server;
 /**
  * 需要转发的请求
  */
-class Fault extends \pms\Controller
+class Fault extends \app\Controller
 {
 
     public function initialize()
@@ -22,7 +22,7 @@ class Fault extends \pms\Controller
      */
     public function proxy()
     {
-        $data = $this->connect->request;
+        $data = $this->connect->getContent();
         \pms\output('262626', 'Fault_proxy');
         $this->proxy_send($data, $this->connect->getFd());
     }

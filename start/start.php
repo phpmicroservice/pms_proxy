@@ -7,6 +7,10 @@ require ROOT_DIR . '/vendor/autoload.php';
 # 进行一些项目配置
 define('APP_DEBUG', \pms\get_env("APP_DEBUG",false));
 define('APP_SECRET_KEY', \pms\get_env("APP_SECRET_KEY"));
+define('DI_FILE', ROOT_DIR.'/app/di.php');
+define('RUNTIME_DIR', ROOT_DIR.'/runtime/');
+
+define('CACHE_DIR', RUNTIME_DIR.'/cache/');
 
 $re9 = \pms\env_exist([
     'GCACHE_HOST', 'GCACHE_PORT', 'GCACHE_AUTH', 'GCACHE_PERSISTENT', 'GCACHE_PREFIX', 'GCACHE_INDEX',
@@ -24,13 +28,13 @@ if (APP_DEBUG) {
 $loader = new \Phalcon\Loader();
 $loader->registerNamespaces(
     [
-        'apps' => ROOT_DIR . '/apps/',
+        'app' => ROOT_DIR . '/app/',
         'tool' => ROOT_DIR . '/tool/',
     ]
 );
 $loader->register();
 
-$server = new \pms\Server('0.0.0.0', 9502, SWOOLE_PROCESS, SWOOLE_SOCK_TCP, [
+$server = new \pms\TcpServer('0.0.0.0', 9502, SWOOLE_PROCESS, SWOOLE_SOCK_TCP, [
     'daemonize' => false,
     'reactor_num_mulriple' => 2,
     'worker_num_mulriple' => 4,

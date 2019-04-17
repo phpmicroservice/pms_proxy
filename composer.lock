@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e46f1d169e480931f1f8f88408bab3c",
+    "content-hash": "bc12b63387dc9ae9297bab046100b25e",
     "packages": [
         {
             "name": "phalcon/ide-stubs",
@@ -115,14 +115,8 @@
             "version": "0.3.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpmicroservice/pms.git",
-                "reference": "8a96725585908a21c8d6ac407d1a2258ca9890c6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpmicroservice/pms/zipball/8a96725585908a21c8d6ac407d1a2258ca9890c6",
-                "reference": "8a96725585908a21c8d6ac407d1a2258ca9890c6",
-                "shasum": ""
+                "url": "https://gitee.com/xswkspms/pms.git",
+                "reference": "cba524e707867b81810cfa8c1f458bca605ba800"
             },
             "require": {
                 "ext-phalcon": "3.4.*",
@@ -164,11 +158,7 @@
                 "tcp",
                 "websockect"
             ],
-            "support": {
-                "source": "https://github.com/phpmicroservice/pms/tree/0.3",
-                "issues": "https://github.com/phpmicroservice/pms/issues"
-            },
-            "time": "2019-02-17T10:16:48+00:00"
+            "time": "2019-03-22T14:03:05+00:00"
         }
     ],
     "packages-dev": [],

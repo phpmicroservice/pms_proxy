@@ -2,7 +2,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/phpmicroservice/pms.git"
+      "url": "https://gitee.com/xswkspms/pms.git"
     }
   ],
   "require": {

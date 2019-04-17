@@ -5,9 +5,6 @@
  * 服务的全局注册都这里,依赖注入
  */
 
-use Phalcon\Mvc\Url as UrlResolver;
-use Phalcon\Mvc\Model\Manager as ModelsManager;
-use Phalcon\Events\Manager;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
 
@@ -28,7 +25,14 @@ $loader->register();
  * services to provide a full stack framework.
  */
 $di = new Phalcon\DI\FactoryDefault();
-
+$di->setShared('dispatcher', function () {
+    #
+    $dispatcher = new Phalcon\Cli\Dispatcher();
+    $dispatcher->setDefaultNamespace('app\controller');
+    $dispatcher->setActionSuffix('');
+    $dispatcher->setTaskSuffix('');
+    return $dispatcher;
+});
 $di->setShared('dConfig', function () {
     #Read configuration
     $config = new Phalcon\Config(require ROOT_DIR . '/config/config.php');
@@ -151,20 +155,34 @@ $di["db"] = function () use ($di) {
     );
 };
 
-
-$di["router"] = function () {
+$di->setShared('router2', function () {
     $router = new \Phalcon\Mvc\Router();
-    $router->setDefaultNamespace('app\\controller');
-    $router->setDefaultController('index');
+    $router->setDefaultController('open');
     $router->setDefaultAction('index');
     $router->add(
-        "/:controller/:action/:params", [
-            "controller" => 1,
-            "action" => 2,
-            'params' => 3
+        "/:controller/:action/:params",
+        [
+            "controller" => 'fault',
+            "action" => 'proxy'
+        ]
+    );
+    $router->add(
+        "/open",
+        [
+            "controller" => 'open',
+            "action" => 'index'
         ]
     );
 
-    return $router;
-};
 
+    $router->add(
+        "/close",
+        [
+            "controller" => 'close',
+            "action" => 'index'
+        ]
+    );
+   
+    
+    return $router;
+});
